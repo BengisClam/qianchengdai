@@ -32,24 +32,9 @@ class HomePage:
         wait = WebDriverWait(self.driver, 20)
         return wait.until(ec.presence_of_element_located(locator))
 
-    def login(self, username, pwd):
+    def get_element__user(self):
         """
-        使用函数封装用户名和密码
-        :param driver:
-        :param username:
-        :param pwd:
+
         :return:
         """
-        # 输入网址 get
-        self.driver.get('http://120.78.128.25:8765')
-        # 点击登录 click_login
-        self.driver.find_element_by_css_selector('a[href="/Index/login.html"]').click()
-        # 输入用户名和密码
-        username_ele = self.wait_click_element(self.driver, (By.NAME, 'phone'))
-        pwd_ele = self.wait_click_element(self.driver, (By.NAME, 'password'))
-        username_ele.send_keys(username)
-        pwd_ele.send_keys(pwd)
-        # 提交  1.直接使用submit()   2.定位登录按钮
-        # username.submit()
-        self.driver.find_element_by_xpath("//button[contains(@class,'btn-special')]").click()
-
+        return self.wait_presence_element(self.driver, (By.CSS_SELECTOR, 'a[href="/Member/index.html"]'))

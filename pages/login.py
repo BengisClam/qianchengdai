@@ -23,11 +23,11 @@ class LoginPage:
         self.driver = driver
 
     # 封装显示等待
-    def wait_click_element(self, driver, locator):
+    def wait_click_element(self, locator):
         wait = WebDriverWait(self.driver, 30)
         return wait.until(ec.element_to_be_clickable(locator))
 
-    def wait_presence_element(self, driver, locator):
+    def wait_presence_element(self, locator):
         wait = WebDriverWait(self.driver, 20)
         return wait.until(ec.presence_of_element_located(locator))
 
@@ -44,8 +44,8 @@ class LoginPage:
         # 点击登录 click_login
         self.click_login()
         # 输入用户名和密码
-        username_ele = self.wait_click_element(self.driver, (By.NAME, 'phone'))
-        pwd_ele = self.wait_click_element(self.driver, (By.NAME, 'password'))
+        username_ele = self.wait_click_element((By.NAME, 'phone'))
+        pwd_ele = self.wait_click_element((By.NAME, 'password'))
         username_ele.send_keys(username)
         pwd_ele.send_keys(pwd)
         # 提交  1.直接使用submit()   2.定位登录按钮
@@ -60,8 +60,8 @@ class LoginPage:
         return self.driver.find_element_by_css_selector('a[href="/Index/login.html"]').click()
 
     def get_element_error_info(self):
-        ret = self.wait_presence_element(self.driver, (By.CSS_SELECTOR, ".form-error-info"))
-        return ret
+        return self.wait_presence_element( (By.CSS_SELECTOR, ".form-error-info"))
+
 
     def get_element_other(self):
         pass
